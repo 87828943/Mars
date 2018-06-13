@@ -15,5 +15,6 @@ public class MarsApplication {
         System.out.println("...............................................................");
         System.out.println("..................Service starts successfully..................");
         System.out.println("...............................................................");
+    
 	}
 }
