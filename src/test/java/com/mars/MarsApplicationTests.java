@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MarsApplicationTests {
@@ -19,10 +21,11 @@ public class MarsApplicationTests {
 	@Test
 	public void testUser(){
 		User user = new User();
-		user.setName("abc");
-		user.setEmail("abc@qq.com");
+		user.setName("def");
+		user.setEmail("def@qq.com");
 		user.setPassword(MD5Util.encrypt("mimahenjiandan"));
-
+		user.setCreateDate(new Date());
+		user.setUpdateDate(new Date());
 		userRepository.save(user);
 		//userRepository.findAll();
 		//userRepository.delete(user);
