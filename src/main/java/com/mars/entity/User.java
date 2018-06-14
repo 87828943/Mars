@@ -25,8 +25,8 @@ public class User extends BaseEntity{
     private String logo;
 
     //描述
-    @Column(name="desc")
-    private String desc;
+    @Column(name="description")
+    private String description;
 
     public String getName() {
         return name;
@@ -60,11 +60,11 @@ public class User extends BaseEntity{
         this.logo = logo;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String desc) {
+        this.description = description;
     }
 }
