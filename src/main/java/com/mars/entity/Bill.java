@@ -9,7 +9,7 @@ import javax.persistence.Table;
 public class Bill extends BaseEntity{
 
     //账单类型
-    @Column(name="bill_type", columnDefinition = "0")
+    @Column(name="bill_type")
     private Integer billType;
 
     //备注
