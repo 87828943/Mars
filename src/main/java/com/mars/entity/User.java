@@ -20,6 +20,14 @@ public class User extends BaseEntity{
     @Column(name="password", nullable = false)
     private String password;
 
+    //logo
+    @Column(name="logo")
+    private String logo;
+
+    //描述
+    @Column(name="desc")
+    private String desc;
+
     public String getName() {
         return name;
     }
@@ -42,5 +50,21 @@ public class User extends BaseEntity{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 }

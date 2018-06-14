@@ -1,9 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-  <meta name="description" content="Bootstrap Admin App + jQuery"/>
-  <meta name="keywords" content="app, responsive, jquery, bootstrap, dashboard, admin"/>
   <title>云记账 | 让记账更简单</title>
   <link rel="icon" href="/img/icon.ico" type="image/x-icon" />
  
@@ -19,7 +16,7 @@
          <div class="panel panel-dark panel-flat">
             <div class="panel-heading text-center">
                <a href="/">
-                  <img src="/img/avatar.png" alt="Image" class="block-center img-rounded"/>
+                  <img src="/img/avatar.png" alt="Image" style="width:200px;" class="block-center img-rounded"/>
                </a>
             </div>
             <div class="panel-body" id="loginPage">
@@ -35,7 +32,7 @@
                   </div>
                   <div class="clearfix">
                      <div class="pull-right">
-                        <a href="/forgotPassword" class="text-muted">忘记密码？</a>
+                        <a href="/user/forgotPassword" class="text-muted">忘记密码？</a>
                      </div>
                   </div>
                   <button v-on:click="login" class="btn btn-block btn-primary mt-lg">登录</button>
