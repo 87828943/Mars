@@ -11,7 +11,7 @@ public class IndexController {
 
     @RequestMapping(value = "/",method = RequestMethod.GET)
     private String index(Model model){
-        return "index";
+        return "layout";
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
