@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class IndexController {
 
 
-    @RequestMapping(value = "/",method = RequestMethod.GET)
+    @RequestMapping(value = "/index",method = RequestMethod.GET)
     private String index(Model model){
+        return "index";
+    }
+
+    @RequestMapping(value = "/",method = RequestMethod.GET)
+    private String layout(Model model){
         return "layout";
     }
 
@@ -22,5 +27,15 @@ public class IndexController {
     @RequestMapping(value="/register",method=RequestMethod.GET)
     public String regist() {
         return "register";
+    }
+
+    @RequestMapping(value = "/test/test1",method = RequestMethod.POST)
+    private String test1(Model model){
+        return "bill/test1";
+    }
+
+    @RequestMapping(value = "/test/test2",method = RequestMethod.POST)
+    private String test2(Model model){
+        return "bill/test2";
     }
 }

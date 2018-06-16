@@ -15,20 +15,18 @@
       <div class="block-center mt-xl wd-xl">
          <div class="panel panel-dark panel-flat">
             <div class="panel-heading text-center">
-               <a href="/">
+               <a href="/index">
                   <img src="/img/avatar.png" alt="Image" style="width:200px;" class="block-center img-rounded"/>
                </a>
             </div>
-            <div class="panel-body" id="loginPage">
+            <div class="panel-body">
                <p class="text-center pv">请登录</p>
-               <form id="form" data-parsley-validate="true" onsubmit="return false">
+               <form id="form">
                   <div class="form-group has-feedback">
-                     <input type="text" placeholder="邮箱地址或登录名称" v-model="username" class="form-control" data-parsley-error-message="请输入邮箱地址或登录名称" required="required" />
-                     <span class="fa fa-envelope form-control-feedback text-muted"></span>
+                     <input type="text" placeholder="邮箱地址或登录名称" class="form-control" />
                   </div>
                   <div class="form-group has-feedback">
-                     <input type="password" placeholder="密码" v-model="password" class="form-control" data-parsley-error-message="请输入密码" required="required" />
-                     <span class="fa fa-lock form-control-feedback text-muted"></span>
+                     <input type="password" placeholder="密码" class="form-control"/>
                   </div>
                   <div class="clearfix">
                      <div class="pull-right">

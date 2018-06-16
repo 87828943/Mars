@@ -6,6 +6,7 @@
    <link rel="icon" href="/img/icon.ico" type="image/x-icon" />
    <link rel="stylesheet" th:href="@{/vendor/fontawesome/css/font-awesome.min.css}"></link>
 　　<link rel="stylesheet" th:href="@{/vendor/simple-line-icons/css/simple-line-icons.css}"></link>
+　　<link rel="stylesheet" th:href="@{/vendor/bootstrapvalidator/bootstrapValidator.min.css}"></link>
 　　<link rel="stylesheet" th:href="@{/media/css/bootstrap.css}"></link>
 　　<link rel="stylesheet" th:href="@{/media/css/app.css}"></link>
 　　<link rel="stylesheet" th:href="@{/media/css/theme-i.css}"></link>
@@ -15,23 +16,20 @@
       <div class="block-center mt-xl wd-xl">
          <div class="panel panel-dark panel-flat">
             <div class="panel-heading text-center">
-               <a href="/">
+               <a href="/index">
                   <img src="/img/avatar.png" alt="Image" style="width:200px;" class="block-center img-rounded"/></a>
             </div>
             <div class="panel-body" id="registPage">
                <p class="text-center pv">注册新用户</p>
-               <form id="form" data-parsley-validate="true" onsubmit="return false">
-                  <div class="form-group has-feedback">
-                     <input id="email" type="email" placeholder="输入邮箱地址" class="form-control" v-model="email"  data-parsley-required-message="请输入邮箱地址" data-parsley-type-message="请输入正确的邮箱地址" required="required"/>
-                     <span class="fa fa-envelope form-control-feedback text-muted"></span>
+               <form id="registerForm">
+                  <div class="form-group">
+                     <input id="email" name="email" type="text" placeholder="输入邮箱地址" class="form-control"/>
                   </div>
-                  <div class="form-group has-feedback">
-                     <input id="name" type="text" placeholder="昵称" class="form-control" v-model="userName" data-parsley-required-message="请输入昵称" required="required"/>
-                     <span class="fa fa-user form-control-feedback text-muted"></span>
+                  <div class="form-group">
+                     <input id="name" name="name" type="text" placeholder="昵称" class="form-control"/>
                   </div>
-                  <div class="form-group has-feedback">
-                     <input id="password" type="password" placeholder="密码" class="form-control" v-model="password" required="required" data-parsley-required-message="请输入密码" pattern="/^(?![0-9]+$)(?![a-zA-Z]+$)(?![^0-9a-zA-Z]+$)\S{6,20}$/" data-parsley-pattern-message="请输入6-20位字母数字组合" />
-                     <span class="fa fa-lock form-control-feedback text-muted"></span>
+                  <div class="form-group">
+                     <input id="password" name="password" type="password" placeholder="密码" class="form-control"/>
                   </div>
                   <button onclick="register()" class="btn btn-block btn-primary mt-lg">创建账户</button>
                </form>
@@ -48,7 +46,7 @@
       </div>
    </div>
    <script src="index/vendor/jquery/jquery.min.js"></script>
-   <script th:src="@{/vendor/parsleyjs/dist/parsley.min.js}"></script>
+   <script th:src="@{/vendor/bootstrapvalidator/bootstrapValidator.min.js}"></script>
    <script th:src="@{/js/user/register.js}"></script>
 </body>
 </html>
