@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8"/>
   <title>云记账 | 让记账更简单</title>
@@ -35,7 +35,7 @@
                         <a href="/user/forgotPassword" class="text-muted">忘记密码？</a>
                      </div>
                   </div>
-                  <button v-on:click="login" class="btn btn-block btn-primary mt-lg">登录</button>
+                  <button id="login" class="btn btn-block btn-primary mt-lg">登录</button>
                </form>
                <p></p>
                <div id="errorMsg" class="alert alert-danger text-center" style="display:none;"></div>
@@ -50,7 +50,6 @@
       </div>
    </div>
   </body>
-   <script type="text/javascript" src="/webjarslocator/jquery/jquery.min.js"></script>
-   <script type="text/javascript" src="/webjarslocator/vue/vue.min.js"></script>
-
+    <script src="index/vendor/jquery/jquery.min.js"></script>
+    <script th:src="@{/js/user/login.js}" ></script>
 </html>

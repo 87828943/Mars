@@ -15,11 +15,11 @@ public class BaseEntity implements Serializable{
     @Column(name= "is_delete", nullable = false)
     private Integer isDelete = 0;
 
-    @Column(name="create_date", nullable = false)
+    @Column(name="create_date")
     private Date createDate;
 
-    @Column(name="update_date", nullable = false)
-    private Date updateDate;
+    @Column(name="update_date")
+    private Date updateDate = new Date();
 
     public Long getId() {
         return id;
