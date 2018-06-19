@@ -21,15 +21,10 @@ public class ResponseData {
         this.resMsg = e.getMsg();
     }
 
-    public ResponseData(String resCode) {
-        this.resCode = resCode;
-        this.resMsg = "";
+    public ResponseData(Object obj) {
+        this.data = obj;
     }
 
-    public ResponseData(String resCode, String resMsg) {
-        this.resCode = resCode;
-        this.resMsg = resMsg;
-    }
 
     public String getResCode() {
         return resCode;

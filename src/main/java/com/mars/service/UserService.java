@@ -11,8 +11,8 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public void register(User user) {
-        userRepository.save(user);
+    public User register(User user) {
+        return userRepository.save(user);
     }
 
     public User findByNameOrEmail(String name, String email) {

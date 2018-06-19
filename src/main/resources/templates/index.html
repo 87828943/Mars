@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" >
 <head>
 
     <meta charset="utf-8"/>
@@ -30,7 +30,8 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="/login" >登录</a>
+                    <a href="/login" th:if="${session.mars_user == null}">登录</a>
+                    <a href="/" th:if="${session.mars_user != null}" th:text="${session.mars_user.name}" class="userName"></a>
                 </li>
                 <li class="hidden">
                     <a href="#page-top"></a>

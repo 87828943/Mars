@@ -11,12 +11,14 @@
                         <div class="user-block-picture">
                            <div class="user-block-status">
                               <a href="javascript:void(0);">
-                                 <img alt="" class="img-thumbnail img-circle" src="img/testlogo.png" id="leftProfilePicture"/></a>
+                                 <img alt="" class="img-thumbnail img-circle" th:src="${session.mars_user.logo == null?'img/testlogo.png':session.mars_user.logo}"/>
+                              </a>
                            </div>
                         </div>
                         <div class="user-block-info">
-                           <div class="user-block-name" id="leftUserName">欢迎 欢迎</div>
-                           <div class="user-block-role" id="leftIntroduction">暂无简介</div>
+                           <div class="user-block-name" th:text="'欢迎  '+${session.mars_user.name}"></div>
+                           <div class="user-block-role" th:if="${session.mars_user.description == null}">暂无简介</div>
+                           <div class="user-block-role" th:if="${session.mars_user.description != null}" th:text="${session.mars_user.description}"></div>
                         </div>
                      </div>
                   </div>

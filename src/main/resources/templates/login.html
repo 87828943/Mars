@@ -2,13 +2,13 @@
 <head>
   <meta charset="utf-8"/>
   <title>云记账 | 让记账更简单</title>
-  <link rel="icon" href="/img/icon.ico" type="image/x-icon" />
- 
-  <link rel="stylesheet" th:href="@{/vendor/fontawesome/css/font-awesome.min.css}"></link>
-  <link rel="stylesheet" th:href="@{/vendor/simple-line-icons/css/simple-line-icons.css}"></link>
-  <link rel="stylesheet" th:href="@{/media/css/bootstrap.css}"></link>
-  <link rel="stylesheet" th:href="@{/media/css/app.css}"></link>
-  <link rel="stylesheet" th:href="@{/media/css/theme-i.css}"></link>
+    <link rel="icon" href="/img/icon.ico" type="image/x-icon" />
+    <link rel="stylesheet" th:href="@{/vendor/fontawesome/css/font-awesome.min.css}"></link>
+    <link rel="stylesheet" th:href="@{/vendor/simple-line-icons/css/simple-line-icons.css}"></link>
+    <link rel="stylesheet" th:href="@{/vendor/bootstrapvalidator/bootstrapValidator.min.css}"></link>
+    <link rel="stylesheet" th:href="@{/media/css/bootstrap.css}"></link>
+    <link rel="stylesheet" th:href="@{/media/css/app.css}"></link>
+    <link rel="stylesheet" th:href="@{/media/css/theme-i.css}"></link>
  </head>
   <body>
     <div class="wrapper">
@@ -21,19 +21,19 @@
             </div>
             <div class="panel-body">
                <p class="text-center pv">请登录</p>
-               <form id="form">
-                  <div class="form-group has-feedback">
-                     <input type="text" placeholder="邮箱地址或登录名称" class="form-control" />
+               <form id="loginForm">
+                  <div class="form-group">
+                     <input id="nameOrEmail" name="nameOrEmail" type="text" placeholder="邮箱地址或登录名称" class="form-control" />
                   </div>
-                  <div class="form-group has-feedback">
-                     <input type="password" placeholder="密码" class="form-control"/>
+                  <div class="form-group">
+                     <input id="password" name="password" type="password" placeholder="密码" class="form-control"/>
                   </div>
                   <div class="clearfix">
                      <div class="pull-right">
-                        <a href="/user/forgotPassword" class="text-muted">忘记密码？</a>
+                        <a href="/forgotPassword" class="text-muted">忘记密码？</a>
                      </div>
                   </div>
-                  <button id="login" class="btn btn-block btn-primary mt-lg">登录</button>
+                  <button onclick="login()" class="btn btn-block btn-primary mt-lg">登录</button>
                </form>
                <p></p>
                <div id="errorMsg" class="alert alert-danger text-center" style="display:none;"></div>
@@ -49,5 +49,6 @@
    </div>
   </body>
     <script src="index/vendor/jquery/jquery.min.js"></script>
+    <script th:src="@{/vendor/bootstrapvalidator/bootstrapValidator.min.js}"></script>
     <script th:src="@{/js/user/login.js}" ></script>
 </html>

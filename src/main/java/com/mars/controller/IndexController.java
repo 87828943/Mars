@@ -29,6 +29,11 @@ public class IndexController {
         return "register";
     }
 
+    @RequestMapping(value = "/forgotPassword",method = RequestMethod.GET)
+    private String forgotPassword(){
+        return "user/forgotPassword";
+    }
+
     @RequestMapping(value = "/test/test1",method = RequestMethod.POST)
     private String test1(Model model){
         return "bill/test1";
