@@ -69,7 +69,7 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/register",method = RequestMethod.POST)
-    private ResponseData register(User user, HttpServletRequest request){
+    private ResponseData register(User user, HttpServletRequest request,HttpServletResponse response){
         if(user==null || StringUtils.isEmpty(user.getEmail()) || StringUtils.isEmpty(user.getName()) || StringUtils.isEmpty(user.getPassword())){
             return new ResponseData(MarsException.PARAM_EXCEPTION);
         }
@@ -90,6 +90,7 @@ public class UserController {
         User registerUser = userService.register(user);
         HttpSession session = request.getSession();
         session.setAttribute(MARS_SESSION_USER_KEY,registerUser);
+        CookieUtil.addCookie(response, MARS_COOKIE_USER_KEY, user.toString(), 0);
         return new ResponseData();
     }
     
