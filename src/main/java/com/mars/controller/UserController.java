@@ -2,7 +2,6 @@ package com.mars.controller;
 
 import java.util.Date;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -93,5 +92,21 @@ public class UserController {
         session.setAttribute(MARS_SESSION_USER_KEY,registerUser);
         return new ResponseData();
     }
-
+    
+    
+    @ResponseBody
+    @RequestMapping(value = "/logout",method = RequestMethod.POST)
+    private ResponseData logout(User user, HttpServletRequest request,HttpServletResponse response) throws Exception{
+    	//首先是考虑编码问题
+        request.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf-8");
+    	//false代表：不创建session对象，只是从request中获取。  
+        HttpSession session = request.getSession(false);
+        if(session == null){
+            return new ResponseData();  
+        }  
+        session.removeAttribute(MARS_SESSION_USER_KEY);
+        CookieUtil.addCookie(response, MARS_COOKIE_USER_KEY, null, 0);
+        return new ResponseData();
+    }
 }
