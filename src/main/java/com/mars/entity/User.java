@@ -64,7 +64,13 @@ public class User extends BaseEntity{
         return description;
     }
 
-    public void setDescription(String desc) {
+    public void setDescription(String description) {
         this.description = description;
     }
+
+	@Override
+	public String toString() {
+		return "name=" + name + "#email=" + email + "#password=" + password + "#logo=" + logo + "#description=" + description;
+	}
+    
 }
