@@ -10,6 +10,7 @@ public enum MarsException {
     NAME_EXIST("10002","昵称已占用！"),
     USER_EXIST("10003","用户不存在！"),
     PASSWORD_ERROR("10004","密码不正确！"),
+    SENDEMAIL_ERROR("10005","发送邮件失败！请稍后再试！"),
 
     //test:200001
     TEST("20001","测试占用");
