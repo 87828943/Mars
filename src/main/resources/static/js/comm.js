@@ -44,7 +44,7 @@ function handleServerResponse() {
 		//document.getElementById("mainSection").innerHTML =xmlhttp.responseText;
 		var text = xmlhttp.responseText;
 		if(text.indexOf("<title>Favorites error Page</title>") >= 0){
-			window.location.href="/error.html";
+			window.location.href="/404.html";
 		}else{
 			$("#content").html(xmlhttp.responseText);
 		}

@@ -18,4 +18,8 @@ public class UserService {
     public User findByNameOrEmail(String name, String email) {
         return userRepository.findByNameOrEmail(name,email);
     }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 }
