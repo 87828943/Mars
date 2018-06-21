@@ -4,16 +4,11 @@ import com.mars.entity.User;
 import com.mars.entity.result.ResponseData;
 import com.mars.exception.MarsException;
 import com.mars.service.UserService;
+import com.mars.utils.CookieUtil;
 import com.mars.utils.MD5Util;
 import com.mars.utils.RedisUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.util.Date;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -27,18 +22,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.UUID;
 
 import static java.util.concurrent.TimeUnit.MINUTES;
-import com.alibaba.fastjson.JSONObject;
-import com.mars.entity.User;
-import com.mars.entity.result.ResponseData;
-import com.mars.exception.MarsException;
-import com.mars.service.UserService;
-import com.mars.utils.CookieUtil;
-import com.mars.utils.MD5Util;
 
 @Controller
 @RequestMapping("/user")
@@ -83,7 +72,6 @@ public class UserController {
             return new ResponseData(MarsException.PASSWORD_ERROR);
         }
         String cookieStr = "userId:"+loginUser.getId().toString()+"name:"+loginUser.getName();
-        String userCookie = JSONObject.toJSONString(loginUser);
         String userCookie2 = loginUser.toString();
         //设置cookie
         CookieUtil.addCookie(response, MARS_COOKIE_USER_KEY, userCookie2, 24*60*7);
