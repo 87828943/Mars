@@ -9,7 +9,6 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -20,7 +19,6 @@ import java.lang.reflect.Method;
 
 @Configuration
 @EnableCaching
-@PropertySource(value = "classpath:/application-dev.properties")
 public class RedisConfig extends CachingConfigurerSupport{
     @Value("${spring.redis.host}")
     private String host;
@@ -66,6 +64,4 @@ public class RedisConfig extends CachingConfigurerSupport{
         jackson2JsonRedisSerializer.setObjectMapper(om);
         template.setValueSerializer(jackson2JsonRedisSerializer);
     }
-
-
 }
