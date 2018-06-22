@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,11 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mars.common.aop.LoggerAnnotation;
 import com.mars.entity.User;
 import com.mars.entity.result.ResponseData;
 import com.mars.exception.MarsException;
@@ -62,7 +63,8 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    private ResponseData login(User user, HttpServletRequest request,HttpServletResponse response){
+    @LoggerAnnotation(desc = "用户登录")
+    public ResponseData login(User user, HttpServletRequest request,HttpServletResponse response){
         if(user==null || StringUtils.isEmpty(user.getName()) || StringUtils.isEmpty(user.getPassword())){
             return new ResponseData(MarsException.PARAM_EXCEPTION);
         }
@@ -90,7 +92,8 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/register",method = RequestMethod.POST)
-    private ResponseData register(User user, HttpServletRequest request,HttpServletResponse response){
+    @LoggerAnnotation(desc = "用户注册")
+    public ResponseData register(User user, HttpServletRequest request,HttpServletResponse response){
         if(user==null || StringUtils.isEmpty(user.getEmail()) || StringUtils.isEmpty(user.getName()) || StringUtils.isEmpty(user.getPassword())){
             return new ResponseData(MarsException.PARAM_EXCEPTION);
         }
@@ -118,7 +121,8 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/logout",method = RequestMethod.POST)
-    private ResponseData logout(User user, HttpServletRequest request,HttpServletResponse response) throws Exception{
+    @LoggerAnnotation(desc = "用户注销")
+    public ResponseData logout(User user, HttpServletRequest request,HttpServletResponse response) throws Exception{
     	//首先是考虑编码问题
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
@@ -135,8 +139,8 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/forgotPassword",method = RequestMethod.POST)
-    private ResponseData forgotPassword(String email,HttpServletRequest request){
-        logger.info("forgotPassword email,toEmail:[{}]",email);
+    @LoggerAnnotation(desc = "找回密码发送邮件")
+    public ResponseData forgotPassword(String email,HttpServletRequest request){
         if(StringUtils.isEmpty(email)){
             return new ResponseData(MarsException.PARAM_EXCEPTION);
         }
@@ -149,7 +153,7 @@ public class UserController {
         //设置秘钥10分钟有效期
         redisUtil.set(String.valueOf(user.getId()),key,10L,MINUTES);
 
-        String url = "http://" + request.getServerName() + ":"+ request.getServerPort()+ request.getContextPath() + "/user/newPassword"+ "?eamil="+user.getEmail()+"&key="+key;
+        String url = "http://" + request.getServerName() + ":"+ request.getServerPort()+ request.getContextPath() + "/user/newPassword"+ "?email="+user.getEmail()+"&key="+key;
         String content ="您好，尊敬的："+user.getName()+" 先生/女士：<br/>　　请点击下方链接重置您的账号密码↓↓↓↓↓ <br/>                     "+"<a href='"+url+"' ><pre>"+url+"</pre></a><br/>    ps1:链接24小时内有效，失效后请重新操作；<br/>     ps2:链接打不开请复制到浏览器打开；<br/>     ps3:如若不是本人操作，请忽视本邮件。<br/>          <a href='http://www.guowenbo.top' target='_blank'><font color='red'>Mars</font></a>";
 
         if(!sendHtmlEmail(email,"[MARS-重置密码]",content)){
@@ -158,6 +162,33 @@ public class UserController {
         return new ResponseData();
     }
 
+    @RequestMapping(value = "/newPassword",method = RequestMethod.GET)
+    public String newPassword(String email,String key){
+        return "user/newPassword";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/setNewPassword",method = RequestMethod.POST)
+    @LoggerAnnotation(desc = "重置密码")
+    public ResponseData setNewPassword(String newPassword,String email,String key){
+        if(StringUtils.isEmpty(newPassword) || StringUtils.isEmpty(email) || StringUtils.isEmpty(key)){
+            return new ResponseData(MarsException.PARAM_EXCEPTION);
+        }
+        User user = userService.findByEmail(email);
+        if(user==null){
+            return new ResponseData(MarsException.USER_EXIST);
+        }
+
+        String s = (String)redisUtil.get(String.valueOf(user.getId()));
+        if(StringUtils.isEmpty(s) || !s.equals(key)){
+            return new ResponseData(MarsException.LINK_VALIDE);
+        }
+        redisUtil.remove(String.valueOf(user.getId()));
+
+        userService.setNewPasswordById(MD5Util.encrypt(MARS_MD5_PASSWORD_KEY+newPassword),new Date(),user.getId());
+
+        return new ResponseData();
+    }
 
     /*
     * 发送普通邮件

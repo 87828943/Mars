@@ -1,12 +1,12 @@
 package com.mars.service;
 
-import java.util.Optional;
-
-import com.mars.entity.User;
-import com.mars.repository.UserRepository;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.mars.entity.User;
+import com.mars.repository.UserRepository;
 
 @Service
 public class UserService {
@@ -29,4 +29,7 @@ public class UserService {
 	public User findById(Long id) {
 		return userRepository.findUserById(id);
 	}
+    public void setNewPasswordById(String newPassword, Date updateTime, Long id) {
+        userRepository.setNewPasswordById(newPassword,updateTime,id);
+    }
 }

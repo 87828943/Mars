@@ -1,8 +1,15 @@
 package com.mars.repository;
 
-import com.mars.entity.User;
+import java.util.Date;
+
+import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import com.mars.entity.User;
 
 public interface UserRepository  extends JpaRepository<User, Long>{
     User findByNameOrEmail(String name, String email);
@@ -10,4 +17,9 @@ public interface UserRepository  extends JpaRepository<User, Long>{
     User findByEmail(String email);
 
 	User findUserById(Long id);
+	
+    @Modifying(clearAutomatically=true)
+    @Transactional
+    @Query("update User set password=:newPassword,updateDate=:updateDate where id=:id")
+    void setNewPasswordById(@Param("newPassword")String newPassword, @Param("updateDate")Date updateDate, @Param("id")Long id);
 }
