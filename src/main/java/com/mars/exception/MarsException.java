@@ -11,6 +11,7 @@ public enum MarsException {
     USER_EXIST("10003","用户不存在！"),
     PASSWORD_ERROR("10004","密码不正确！"),
     SENDEMAIL_ERROR("10005","发送邮件失败！请稍后再试！"),
+    LINK_VALIDE("10006","该链接已过期，请重新请求"),
 
     //test:200001
     TEST("20001","测试占用");

@@ -5,6 +5,8 @@ import com.mars.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class UserService {
 
@@ -21,5 +23,9 @@ public class UserService {
 
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    public void setNewPasswordById(String newPassword, Date updateTime, Long id) {
+        userRepository.setNewPasswordById(newPassword,updateTime,id);
     }
 }

@@ -29,6 +29,8 @@ public class MarsFilter implements Filter {
         urlList.add("/user/login");
         urlList.add("/user/register");
         urlList.add("/user/forgotPassword");
+        urlList.add("/user/newPassword");
+        urlList.add("/user/setNewPassword");
     }
 
     @Override
