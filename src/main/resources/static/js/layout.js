@@ -19,3 +19,7 @@ function logout(){
 		});
 	}
 }
+
+function editUser(){
+	
+}

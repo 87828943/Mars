@@ -1,13 +1,16 @@
 package com.mars.controller;
 
-import com.mars.common.aop.LoggerAnnotation;
-import com.mars.entity.User;
-import com.mars.entity.result.ResponseData;
-import com.mars.exception.MarsException;
-import com.mars.service.UserService;
-import com.mars.utils.CookieUtil;
-import com.mars.utils.MD5Util;
-import com.mars.utils.RedisUtil;
+import static java.util.concurrent.TimeUnit.MINUTES;
+
+import java.util.Date;
+import java.util.UUID;
+
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,18 +20,19 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.util.Date;
-import java.util.UUID;
-
-import static java.util.concurrent.TimeUnit.MINUTES;
+import com.mars.common.aop.LoggerAnnotation;
+import com.mars.entity.User;
+import com.mars.entity.result.ResponseData;
+import com.mars.exception.MarsException;
+import com.mars.service.UserService;
+import com.mars.utils.CookieUtil;
+import com.mars.utils.MD5Util;
+import com.mars.utils.RedisUtil;
 
 @Controller
 @RequestMapping("/user")
@@ -73,10 +77,10 @@ public class UserController {
         if(!MD5Util.encrypt(MARS_MD5_PASSWORD_KEY + password).equals(loginUser.getPassword())){
             return new ResponseData(MarsException.PASSWORD_ERROR);
         }
-        String cookieStr = "userId:"+loginUser.getId().toString()+"name:"+loginUser.getName();
+        String cookieStr = "userId="+loginUser.getId().toString()+"#name="+loginUser.getName();
         String userCookie2 = loginUser.toString();
         //设置cookie
-        CookieUtil.addCookie(response, MARS_COOKIE_USER_KEY, userCookie2, 24*60*7);
+        CookieUtil.addCookie(response, MARS_COOKIE_USER_KEY, cookieStr, 24*60*7);
         //设置session
         HttpSession session = request.getSession();
         session.setAttribute(MARS_SESSION_USER_KEY,loginUser);
@@ -226,5 +230,24 @@ public class UserController {
             return Boolean.FALSE;
         }
         return Boolean.TRUE;
+    }
+    /**
+     * 
+	 * @Description: 查询用户详情 
+     * @author: zhaoxingxing
+     * @date: 2018年6月22日 上午11:39:05
+     * @param model
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/editUser",method = RequestMethod.POST)
+    private String editUser(Model model,HttpServletRequest request){
+    	HttpSession session = request.getSession();
+    	User user = (User)session.getAttribute(MARS_SESSION_USER_KEY);
+    	Cookie cookieByName = CookieUtil.getCookieByName(request, MARS_COOKIE_USER_KEY);
+    	Long id = user.getId();
+    	User user2 = userService.findById(id);
+    	model.addAttribute(user2);
+        return "user/editUser";
     }
 }

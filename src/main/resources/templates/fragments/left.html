@@ -10,7 +10,7 @@
                      <div class="item user-block">
                         <div class="user-block-picture">
                            <div class="user-block-status">
-                              <a href="javascript:void(0);">
+                              <a href="javascript:void(0);" onclick="editUser()">
                                  <img alt="" class="img-thumbnail img-circle" th:src="${session.mars_user.logo == null?'img/testlogo.png':session.mars_user.logo}"/>
                               </a>
                            </div>
@@ -51,14 +51,20 @@
                </li>
                <li class=" " id="import">
                   <a title="导入账单" href="javascript:void(0);" onclick="locationUrl('/import','import')">
-                     <em class="icon-login"></em>
+                     <em class="icon-cloud_upload"></em>
                      <span>导入账单</span>
                   </a>
                </li>
                <li class=" " id="export">
                   <a title="导出账单" href="javascript:void(0);" onclick="locationUrl('/export','export')">
-                     <em class="icon-logout"></em>
+                     <em class="icon-cloud_download"></em>
                      <span>导出账单</span>
+                  </a>
+               </li>
+               <li class=" " id="editUser">
+                  <a title="个人设置" href="javascript:void(0);" onclick="locationUrl('/user/editUser','editUser')">
+                     <em class="icon-settings"></em>
+                     <span>个人设置</span>
                   </a>
                </li>
             </ul>
