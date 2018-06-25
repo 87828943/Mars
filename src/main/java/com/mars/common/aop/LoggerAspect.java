@@ -35,7 +35,7 @@ public class LoggerAspect {
     //throwing
     @AfterThrowing(pointcut = "within(com.mars..*) && @annotation(loggerAnnotation)",throwing = "e")
     public void afterThrowingLogger(JoinPoint joinPoint, LoggerAnnotation loggerAnnotation,Exception e){
-        logger.info("--------------error ["+loggerAnnotation.desc()+"]",e);
+        logger.error("--------------error ["+loggerAnnotation.desc()+"]",e);
     }
 
     private String parseParames(Object[] parames) {

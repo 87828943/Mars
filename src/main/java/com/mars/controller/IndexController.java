@@ -1,7 +1,6 @@
 package com.mars.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -10,12 +9,12 @@ public class IndexController {
 
 
     @RequestMapping(value = "/index",method = RequestMethod.GET)
-    private String index(Model model){
+    private String index(){
         return "index";
     }
 
     @RequestMapping(value = "/",method = RequestMethod.GET)
-    private String layout(Model model){
+    private String layout(){
         return "layout";
     }
 
@@ -34,13 +33,9 @@ public class IndexController {
         return "user/forgotPassword";
     }
 
-    @RequestMapping(value = "/test/test1",method = RequestMethod.POST)
-    private String test1(Model model){
-        return "bill/test1";
+    @RequestMapping(value = "/main",method = RequestMethod.POST)
+    private String main(){
+        return "main";
     }
 
-    @RequestMapping(value = "/test/test2",method = RequestMethod.POST)
-    private String test2(Model model){
-        return "bill/test2";
-    }
 }
