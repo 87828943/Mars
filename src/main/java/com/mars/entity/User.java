@@ -68,9 +68,9 @@ public class User extends BaseEntity{
         this.description = description;
     }
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "name=" + name + "#email=" + email + "#password=" + password + "#logo=" + logo + "#description=" + description;
-	}
+	}*/
     
 }

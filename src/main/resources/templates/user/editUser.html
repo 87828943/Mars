@@ -1,87 +1,69 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-   <meta charset="utf-8"/>
-   <title>云记账 | 让记账更简单</title>
-   <link rel="icon" href="/img/icon.ico" type="image/x-icon" />
-   <link rel="stylesheet" th:href="@{/vendor/fontawesome/css/font-awesome.min.css}"></link>
-   <link rel="stylesheet" th:href="@{/vendor/simple-line-icons/css/simple-line-icons.css}"></link>
-   <link rel="stylesheet" th:href="@{/vendor/bootstrapvalidator/bootstrapValidator.min.css}"></link>
-   <link rel="stylesheet" th:href="@{/media/css/bootstrap.css}"></link>
-   <link rel="stylesheet" th:href="@{/media/css/app.css}"></link>
-   <link rel="stylesheet" th:href="@{/media/css/theme-i.css}"></link>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout :: htmlhead" th:with="title='favorites'"></head>
 <body>
-   <div class="wrapper">
-      <div class="block-center mt-xl wd-xl">
-         <div class="panel panel-dark panel-flat">
-            <div class="panel-heading text-center">
-               <a href="/index">
-                  <img src="/img/avatar.png" alt="Image" style="width:200px;" class="block-center img-rounded"/></a>
-            </div>
-            <div class="panel-body" id="registPage">
-               <p class="text-center pv">编辑用户资料</p>
-               <form id="registerForm">
-                  <div class="form-group">
-                  	<span class="label">邮箱：</span>
-                     <input id="email" name="email" type="text" placeholder="输入邮箱地址" class="form-control" readonly="readonly" value=""/>
-                  </div>
-                  <div class="form-group">
-                  	<span class="label">昵称：</span>
-                     <input id="name" name="name" type="text" placeholder="昵称" class="form-control" value=""/>
-                  </div>
-                  <div class="form-group">
-                  	<span class="label">性别：</span>
-                     <input id="sex" name="sex" type="text" placeholder="性别" class="form-control" value=""/>
-                  </div>
-                  <div class="form-group">
-                  	<span class="label">头像：</span>
-                     <div class="mb10">
-                         <span id="spanButtonPlaceHolder"></span>
-                         <img id="loading" class="float:left" src="/images/loading.gif" style="display:none"/>
-                         <div id="messages" style="border:1px solid #DB9A9A;background-color:#FFE8E8;color:#CC0000;text-align: left;display:none"></div>
-                         <input id="btnCancel" type="hidden" clstag="pageclick|keycount|201602251|5"/>
-                         <div class="ftx03">仅支持JPG、GIF、PNG、JPEG、BMP格式，文件小于4M</div>
-                     </div>
-                     <div class="update-rcol">
-                            <div class="smt"><h3>效果预览</h3></div>
-                            <div class="smc">
-                                你上传的图片会自动生成2种尺寸，请注意小尺寸的头像是否清晰
-                                <div class="img-m-cont img-cont">
-                                    <div class="img-s">
-                                        <img id="midImage" name="midImage" src="//storage.360buyimg.com/i.imageUpload/78696e6779756e39323133313431343831313638363030393635_mid.jpg"/>
-                                    </div>
-                                </div>
-                                100*100像素
-                                <div class="img-s-cont img-cont">
-                                    <div class="img-s">
-                                        <img id="smaImage" name="smaImage"  src="//storage.360buyimg.com/i.imageUpload/78696e6779756e39323133313431343831313638363030393635_sma.jpg"/>
-                                    </div>
-                                </div>
-                                50*50像素
-                            </div>
-                        </div>
-                  </div>
-                  <div class="form-group">
-                  	<span class="label">生日：</span>
-                     <input id="birthday" name="birthday" type="text" placeholder="生日" class="form-control" value=""/>
-                  </div>
-                  <button onclick="updateUser()" class="btn btn-block btn-primary mt-lg">提交</button>
-               </form>
-               <p></p>
-               <div id="errorMsg" class="alert alert-danger text-center" style="display:none;"></div>
-               <a href="/login" class="btn btn-block btn-default">已有账户</a>
-            </div>
-         </div>
-         <div class="p-lg text-center">
-            <span>&copy;</span>
-            <span>2018</span>
-            <br/>
-         </div>
-      </div>
-   </div>
-   <script src="index/vendor/jquery/jquery.min.js"></script>
-   <script th:src="@{/vendor/bootstrapvalidator/bootstrapValidator.min.js}"></script>
-   <script th:src="@{/js/user/register.js}"></script>
+<!-- <script src="index/vendor/jquery/jquery.min.js"></script> -->
+<script src="index/vendor/jquery/jquery.1.7.2.min.js"></script>
+<!-- <script th:src="@{/vendor/jquery.form/jquery.form.min.js}"></script> -->
+<script th:src="@{/vendor/jquery.form/jquery.form.js}"></script>
+	<section layout:fragment="content">
+	    <div class="content-wrapper">
+	        <h3>编辑资料</h3>
+	        <div class="row" style="algin:center;">
+	            <div class="col-md-3">
+	                <form id="editUser">
+	               	<table>
+	               		<tr>
+	               			<td><p th:text="'邮箱：'+${user.email}" /></td>
+	               		</tr>
+	               		<tr>
+	               			<td><p th:text="'昵称：'+${user.name}" /></td>
+	               		</tr>
+	               		<tr>
+	               			<td style="display: inline;">性别：<input id="sex" name="sex" type="text" placeholder="性别" class="form-control" /></td>
+	               		</tr>
+	               		<tr>
+	               			<td>头像：
+	               				<!-- <img id="logo" name="logo" th:src="${user.logo == null?'img/testlogo.png':user.logo}" src="//storage.360buyimg.com/i.imageUpload/78696e6779756e39323133313431343831313638363030393635_mid.jpg"/> -->
+	               				<img id="imgid" th:src="${user.logo == null?'img/testlogo.png':user.logo}" style="width:137px; height:127px"/>
+	               				<div class="ftx03">仅支持JPG、GIF、PNG、JPEG、BMP格式，文件小于4M</div>
+	               				
+								<form id="upload" enctype="multipart/form-data" method="post">
+									<p style='color:red;text-align:left;'>
+						            	注：<br/>1.照片的像素为160*180px。<br/>2.照片格式为BMP/JPG/JPEG。<br/>3.建议照片大小不超过40k。
+						            </p>
+						            <input type="file" name="file" class="file" id="uploadimage"/><br/>  
+						            <input type="button" value="上传" id="btn" style="width:137px; height:27px" onclick="uploadLogo()"/>
+						        </form>
+	               			</td>
+	               		</tr>
+	               		<!-- <tr>
+	               			<td>
+	               				<div class="update-rcol">
+	                            <div class="smt"><h3>效果预览</h3></div>
+	                            <div class="smc">
+	                               	 你上传的图片会自动生成2种尺寸，请注意小尺寸的头像是否清晰
+	                                <div class="img-m-cont img-cont">
+	                                    <div class="img-s">
+	                                        <img id="midImage" name="midImage" src="//storage.360buyimg.com/i.imageUpload/78696e6779756e39323133313431343831313638363030393635_mid.jpg"/>
+	                                    </div>
+	                                </div>
+	                                100*100像素
+	                                <div class="img-s-cont img-cont">
+	                                    <div class="img-s">
+	                                        <img id="smaImage" name="smaImage"  src="//storage.360buyimg.com/i.imageUpload/78696e6779756e39323133313431343831313638363030393635_sma.jpg"/>
+	                                    </div>
+	                                </div>
+	                                50*50像素
+	                            </div>
+	                        </div>
+	               			</td>
+	               		</tr> -->
+	               	</table>
+	                  <button onclick="updateUser()" class="btn btn-block btn-primary mt-lg">提交</button>
+	               </form>
+	            </div>
+	        </div>
+	    </div>
+	</section>
 </body>
 </html>

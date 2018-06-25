@@ -77,10 +77,9 @@ public class UserController {
         if(!MD5Util.encrypt(MARS_MD5_PASSWORD_KEY + password).equals(loginUser.getPassword())){
             return new ResponseData(MarsException.PASSWORD_ERROR);
         }
-        String cookieStr = "userId="+loginUser.getId().toString()+"#name="+loginUser.getName();
-        String userCookie2 = loginUser.toString();
+        String cookieStr = "userId="+loginUser.getId().toString();
         //设置cookie
-        CookieUtil.addCookie(response, MARS_COOKIE_USER_KEY, cookieStr, 24*60*7);
+        CookieUtil.addCookie(response, MARS_COOKIE_USER_KEY, cookieStr, 24*60*60*7);
         //设置session
         HttpSession session = request.getSession();
         session.setAttribute(MARS_SESSION_USER_KEY,loginUser);
@@ -241,13 +240,21 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/editUser",method = RequestMethod.POST)
-    private String editUser(Model model,HttpServletRequest request){
+    @LoggerAnnotation(desc = "编辑用户信息")
+    public String editUser(Model model,HttpServletRequest request){
     	HttpSession session = request.getSession();
     	User user = (User)session.getAttribute(MARS_SESSION_USER_KEY);
     	Cookie cookieByName = CookieUtil.getCookieByName(request, MARS_COOKIE_USER_KEY);
-    	Long id = user.getId();
+    	if(cookieByName != null){
+    		String userId = cookieByName.getValue();
+    		String[] split = userId.split("=");
+    		User user4 = userService.findById(Long.parseLong(split[1]));
+    		model.addAttribute("user",user4);
+    	}
+    	/*Long id = user.getId();
     	User user2 = userService.findById(id);
-    	model.addAttribute(user2);
+    	model.addAttribute(user2);*/
         return "user/editUser";
     }
+    
 }
