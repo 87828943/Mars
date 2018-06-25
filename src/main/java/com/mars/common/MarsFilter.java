@@ -4,6 +4,7 @@ package com.mars.common;
 import com.mars.entity.User;
 import com.mars.service.UserService;
 import com.mars.utils.CookieUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -49,7 +50,7 @@ public class MarsFilter implements Filter {
             filterChain.doFilter(servletRequest,servletResponse);
         }else{
         	Cookie cookieByName = CookieUtil.getCookieByName(request, MARS_COOKIE_USER_KEY);
-        	if(cookieByName!=null){
+        	if(cookieByName!=null && StringUtils.isNotBlank(cookieByName.getValue())){
         		String value = cookieByName.getValue();
             	String userId = value.replace("userId=","");
             	if(userId != null){
