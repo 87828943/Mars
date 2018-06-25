@@ -67,17 +67,34 @@
                      <span>账单报表</span>
                   </a>
                </li>
-               <li id="export">
+               <!--<li id="export">
                   <a title="导出账单" href="javascript:void(0);" onclick="locationUrl('','export')">
                      <em class="icon-cloud_download"></em>
                      <span>导出账单</span>
                   </a>
-               </li>
-               <li id="editUser">
-                  <a title="个人设置" href="javascript:void(0);" onclick="locationUrl('/user/editUser','editUser')">
+               </li>-->
+               <li>
+                  <a title="个人设置" data-toggle="collapse" href="#editMySelf">
                      <em class="icon-settings"></em>
                      <span>个人设置</span>
                   </a>
+                  <ul class="nav sidebar-subnav collapse" id="editMySelf">
+                     <li class="sidebar-subnav-header">个人设置</li>
+                     <li id="editUserLogo" >
+                        <a title="更改头像" href="javascript:void(0);" onclick="locationUrl('/user/editUserLogo','editUserLogo')">
+                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                           <em class="icon-plus"></em>
+                           <span>更改头像</span>
+                        </a>
+                     </li>
+                     <li id="editUserInfo" >
+                        <a title="更改资料" href="javascript:void(0);" onclick="locationUrl('user/editUserInfo','editUserInfo')">
+                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                           <em class="icon-plus"></em>
+                           <span>更改资料</span>
+                        </a>
+                     </li>
+                  </ul>
                </li>
             </ul>
          </nav>
