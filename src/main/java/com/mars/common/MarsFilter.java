@@ -1,19 +1,17 @@
 package com.mars.common;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-
 import com.mars.entity.User;
 import com.mars.service.UserService;
 import com.mars.utils.CookieUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +25,9 @@ public class MarsFilter implements Filter {
     private static List<String> urlList = new ArrayList<>();
     @Value("${mars.session.user.key}")
     private String MARS_SESSION_USER_KEY;
-    @Value("${mars.session.user.key}")
+    @Value("${mars.cookie.user.key}")
     private String MARS_COOKIE_USER_KEY;
-    
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         urlList.add("/index");
@@ -50,18 +48,16 @@ public class MarsFilter implements Filter {
         if(request.getSession().getAttribute(MARS_SESSION_USER_KEY) != null){
             filterChain.doFilter(servletRequest,servletResponse);
         }else{
-        	//TODO 查询cookie
         	Cookie cookieByName = CookieUtil.getCookieByName(request, MARS_COOKIE_USER_KEY);
         	if(cookieByName!=null){
         		String value = cookieByName.getValue();
-            	String userId = value.substring(value.length()-7, value.length());
+            	String userId = value.replace("userId=","");
             	if(userId != null){
-            		filterChain.doFilter(servletRequest,servletResponse);
             		User user = userService.findById(Long.parseLong(userId));
             		request.getSession().setAttribute(MARS_SESSION_USER_KEY, user);
+                    filterChain.doFilter(servletRequest,servletResponse);
             	}
-        	}
-            if(urlList.contains(requestURI) || containsSuffix(requestURI)){
+        	}else if(urlList.contains(requestURI) || containsSuffix(requestURI)){
                 filterChain.doFilter(servletRequest,servletResponse);
             }else{
                 //跳转主页
