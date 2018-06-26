@@ -20,13 +20,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.UUID;
 
@@ -46,6 +51,10 @@ public class UserController extends BaseController{
     private String MARS_COOKIE_USER_KEY;
     @Value("${default.logo}")
     private String DEFAULT_LOGO;
+    @Value("${mars.logo.folder}")
+    private String UPLOADED_FOLDER;
+    @Value("${mars.base.uri}")
+    private String BASE_URI;
 
     @Autowired
     private JavaMailSender javaMailSender;
@@ -240,24 +249,37 @@ public class UserController extends BaseController{
     @RequestMapping(value = "/editUser",method = RequestMethod.POST)
     @LoggerAnnotation(desc = "编辑用户信息")
     public String editUser(Model model,HttpServletRequest request){
-    	HttpSession session = request.getSession();
-    	User user = (User)session.getAttribute(MARS_SESSION_USER_KEY);
-    	Cookie cookieByName = CookieUtil.getCookieByName(request, MARS_COOKIE_USER_KEY);
-    	if(cookieByName != null){
-    		String userId = cookieByName.getValue();
-    		String[] split = userId.split("=");
-    		User user4 = userService.findById(Long.parseLong(split[1]));
-    		model.addAttribute("user",user4);
-    	}
-    	/*Long id = user.getId();
-    	User user2 = userService.findById(id);
-    	model.addAttribute(user2);*/
         return "user/editUser";
     }
 
+    @ResponseBody
     @RequestMapping(value = "/editUserLogo",method = RequestMethod.POST)
-    public String editUserLogo(Model model,HttpServletRequest request){
-        return "user/editUserLogo";
+    @LoggerAnnotation(desc = "更改用户头像")
+    public ResponseData editUserLogo(@RequestParam(value = "file", required = true) MultipartFile file, HttpServletRequest request, HttpServletResponse response){
+        if (file.isEmpty()) {
+            logger.error("未选择图片！");
+            return new ResponseData(MarsException.NOTFOUND_IMAGE);
+        }
+        Long userId = super.getUserId();
+        String savePath = "";
+        try {
+            File fileDir = new File(UPLOADED_FOLDER);
+            if(!fileDir.exists()){
+                fileDir.mkdir();
+            }
+            byte[] bytes = file.getBytes();
+            savePath = MD5Util.encrypt(userId + new Date().getTime() + file.getName()) +".jpg";
+            Path path = Paths.get(UPLOADED_FOLDER+savePath);
+            Files.write(path, bytes);
+        } catch (Exception e) {
+            logger.error("图片上传失败！",e);
+            return new ResponseData(MarsException.FAILED);
+        }
+        User user = getUser();
+        user.setLogo(BASE_URI+savePath);
+        userService.setLogoById(BASE_URI+savePath,new Date(),userId);
+        getSession().setAttribute(MARS_SESSION_USER_KEY,user);
+        return new ResponseData();
     }
-    
+
 }

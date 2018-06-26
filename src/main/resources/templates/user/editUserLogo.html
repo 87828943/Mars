@@ -12,7 +12,7 @@
 							原头像
 						</div>
 						<div class="panel-body">
-							<img th:src="${session.mars_user.logo == null?'img/testlogo.png':session.mars_user.logo}" alt=""/>
+							<img style="width:137px;height: 127px;" th:src="${session.mars_user.logo == null?'img/testlogo.png':session.mars_user.logo}" alt=""/>
 						</div>
 					</div>
 					<div class="panel">
@@ -24,22 +24,19 @@
 								<form enctype="multipart/form-data" method="POST">
 									<input type="file" name="file" id="file" class="file" >
 								</form>
-								<div class="form-group">
-									<input id="logo" name="logo" style="position:absolute; height:0; width:0; border:0;"/>
-								</div>
 							</div>
 						</div>
 					</div>
-					<button class="btn btn-primary btn-block">提交</button>
 				</div>
 			</div>
 		</div>
 	</div>
+
 </section>
 <script type="text/javascript">
     $(function(){
         $("#file").fileinput({
-            uploadUrl:"/",
+            uploadUrl:"/user/editUserLogo",
             dropZoneEnabled: false,
             showPreview :true, //是否显示预览
             maxFileCount:1, //表示允许同时上传的最大文件个数
@@ -49,16 +46,13 @@
             allowedFileExtensions: ['jpg','png']
         });
         $('#file').on('fileuploaded', function(event, data, previewId, index) {
-            $("#logo").val(data.response.data);
-        });
-        $("#file").on("filecleared",function(event, data, msg){
-            $("#logo").val("");
-        });
-        $('#file').on('fileremoved', function(event, id, index) {
-            $("#logo").val("");
-        });
-        $('#file').on('change',function() {
-            $("#logo").val("");
+            console.log(data);
+            if(data.response.resCode == "00000"){
+                $('#updateSuccessModal').modal('show');
+			}else{
+                $("#errorMsg").html(data.response.resMsg);
+                $('#updateFailedModal').modal('show');
+			}
         });
     });
 </script>

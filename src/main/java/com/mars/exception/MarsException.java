@@ -6,12 +6,13 @@ public enum MarsException {
     PARAM_EXCEPTION("00001","参数错误"),
 
     //user相关:100001
-    EMAIL_EXIST("10001","邮箱已注册！"),
-    NAME_EXIST("10002","昵称已占用！"),
-    USER_EXIST("10003","用户不存在！"),
-    PASSWORD_ERROR("10004","密码不正确！"),
-    SENDEMAIL_ERROR("10005","发送邮件失败！请稍后再试！"),
+    EMAIL_EXIST("10001","邮箱已注册"),
+    NAME_EXIST("10002","昵称已占用"),
+    USER_EXIST("10003","用户不存在"),
+    PASSWORD_ERROR("10004","密码不正确"),
+    SENDEMAIL_ERROR("10005","发送邮件失败！请稍后再试"),
     LINK_VALIDE("10006","该链接已过期，请重新请求"),
+    NOTFOUND_IMAGE("10007","请选择上传图片"),
 
     //test:200001
     TEST("20001","测试占用");

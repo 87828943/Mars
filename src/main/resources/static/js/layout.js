@@ -13,7 +13,9 @@ function logout(){
 			}
 		},
 		error:function(){
-			cofirm
 		}
 	});
+}
+function reloadHtml(){
+    window.location.reload();
 }
