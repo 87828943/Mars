@@ -21,6 +21,16 @@ public class IndexController {
         return "layout";
     }
 
+    @RequestMapping(value = "/main",method = RequestMethod.POST)
+    @LoggerAnnotation(desc = "首页主页面")
+    public String main(){
+        return "main";
+    }
+
+    /*
+    * user相关start
+    * */
+
     @RequestMapping(value = "/login",method = RequestMethod.GET)
     @LoggerAnnotation(desc = "登录页面")
     public String login(){
@@ -39,15 +49,31 @@ public class IndexController {
         return "user/forgotPassword";
     }
 
-    @RequestMapping(value = "/main",method = RequestMethod.POST)
-    @LoggerAnnotation(desc = "首页主页面")
-    public String main(){
-        return "main";
+    @RequestMapping(value = "/newPassword",method = RequestMethod.GET)
+    @LoggerAnnotation(desc = "设置新密码")
+    public String newPassword(String email,String key){
+        return "user/newPassword";
     }
 
     @RequestMapping(value = "/editUserLogo",method = RequestMethod.POST)
-    @LoggerAnnotation(desc = "编辑头像页面")
+    @LoggerAnnotation(desc = "更改头像页面")
     public String editUserLogo(){
         return "user/editUserLogo";
     }
+
+    @RequestMapping(value = "/editUserInfo",method = RequestMethod.POST)
+    @LoggerAnnotation(desc = "更改资料页面")
+    public String editUserInfo(){
+        return "user/editUserInfo";
+    }
+
+    @RequestMapping(value = "/editUserPassword",method = RequestMethod.POST)
+    @LoggerAnnotation(desc = "更改密码页面")
+    public String editUserPassword(){
+        return "user/editUserPassword";
+    }
+
+    /*
+    * user相关end
+    * */
 }

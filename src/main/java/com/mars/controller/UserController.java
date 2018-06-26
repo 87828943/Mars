@@ -168,11 +168,6 @@ public class UserController extends BaseController{
         return new ResponseData();
     }
 
-    @RequestMapping(value = "/newPassword",method = RequestMethod.GET)
-    public String newPassword(String email,String key){
-        return "user/newPassword";
-    }
-
     @ResponseBody
     @RequestMapping(value = "/setNewPassword",method = RequestMethod.POST)
     @LoggerAnnotation(desc = "重置密码")
