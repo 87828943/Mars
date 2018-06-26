@@ -1,16 +1,13 @@
 package com.mars.controller;
 
-import static java.util.concurrent.TimeUnit.MINUTES;
-
-import java.util.Date;
-import java.util.UUID;
-
-import javax.mail.internet.MimeMessage;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import com.mars.common.aop.LoggerAnnotation;
+import com.mars.entity.User;
+import com.mars.entity.result.ResponseData;
+import com.mars.exception.MarsException;
+import com.mars.service.UserService;
+import com.mars.utils.CookieUtil;
+import com.mars.utils.MD5Util;
+import com.mars.utils.RedisUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,18 +22,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mars.common.aop.LoggerAnnotation;
-import com.mars.entity.User;
-import com.mars.entity.result.ResponseData;
-import com.mars.exception.MarsException;
-import com.mars.service.UserService;
-import com.mars.utils.CookieUtil;
-import com.mars.utils.MD5Util;
-import com.mars.utils.RedisUtil;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.Date;
+import java.util.UUID;
+
+import static java.util.concurrent.TimeUnit.MINUTES;
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController{
 
     private Logger logger =  LoggerFactory.getLogger(this.getClass());
 
@@ -255,6 +253,11 @@ public class UserController {
     	User user2 = userService.findById(id);
     	model.addAttribute(user2);*/
         return "user/editUser";
+    }
+
+    @RequestMapping(value = "/editUserLogo",method = RequestMethod.POST)
+    public String editUserLogo(Model model,HttpServletRequest request){
+        return "user/editUserLogo";
     }
     
 }
