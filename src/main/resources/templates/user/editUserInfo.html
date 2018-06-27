@@ -1,19 +1,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:include="layout :: htmlhead"></head>
 <body>
-<section layout:fragment="content">
-	<div class="content-wrapper">
-		<h3>更改资料</h3>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-lg-4 col-md-4">
+	<section layout:fragment="content">
+		<div class="content-wrapper">
+			<h3>更改资料</h3>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-4 col-md-4">
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-
-</section>
-<script type="text/javascript">
-</script>
+	</section>
+<script th:src="@{/js/user/editUserInfo.js}" ></script>
 </body>
 </html>
