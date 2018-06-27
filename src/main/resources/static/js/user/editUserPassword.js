@@ -31,19 +31,22 @@ function validate(){
                     regexp: {
                         regexp: /^(?![0-9]+$)(?![a-zA-Z]+$)(?![^0-9a-zA-Z]+$)\S{6,20}$/,
                         message: '请输入6-20位字母数字组合！'
-                    }
+                    },
+                    different: {
+                        field: 'oldPassword',
+                        message: '新密码不能和旧密码相同'
+                    },
                 }
             },
             newPassword2:{
                 validators: {
+                    notEmpty: {
+                        message: '请再次填写新密码！'
+                    },
                     identical: {//相同
-                        field: 'newPassword', //需要进行比较的input name值
+                        field: 'newPassword',
                         message: '两次密码不一致'
                     }
-                    /*different: {//不能和用户名相同
-                        field: 'username',//需要进行比较的input name值
-                        message: '不能和用户名相同'
-                    },*/
                 }
             }
         }
@@ -65,16 +68,15 @@ function editUserPassword(){
         url: "/user/editUserPassword",
         type: "POST",
         data: {
-            name: nameOrEmail,
-            password: password
+            newPassword: newPassword,
+            oldPassword: oldPassword
         },
         success: function(res) {
             if(res.resCode == "00000"){
-                window.location.href="/";
+                $('#updateSuccessModal').modal('show');
             }else{
-                $("#errorMsg").html("");
                 $("#errorMsg").html(res.resMsg);
-                $("#errorMsg").show();
+                $('#updateFailedModal').modal('show');
             }
         },
         error: function() {
