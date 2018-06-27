@@ -3,22 +3,24 @@ $(function(){
 });
 
 function editUserInfo(){
-	alert("aa");
 	var sex = $("input[name='sex']:checked").val();
+	var description = $("#description").val();
 	$.ajax({
-		url:"user/updateUserInfo"
-		type:"POST"
+		url:"user/updateUserInfo",
+		type:"POST",
 		data:{
-			sex:sex
+			sex:sex,
+			description:description
 		},
 		success:function(res){
+			console.log(res);
 			if(res.resCode == "00000"){
-				window.location.href="/";
-			}else{
-				$("#errorMsg").html("");
+				alert();
+				$('#updateSuccessModal').modal('show');
+            }else{
                 $("#errorMsg").html(res.resMsg);
-                $("#errorMsg").show();
-			}
+                $('#updateFailedModal').modal('show');
+            }
 		},
 		error:function(){
 			

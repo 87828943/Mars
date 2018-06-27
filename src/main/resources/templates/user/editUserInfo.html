@@ -34,9 +34,20 @@
 									<td >
 										<div class="form-group">
 											<div class="col-lg-12" style="padding-right: 0px;padding-left: 0px;">
-												<input type="radio" name= "sex" value="1">&nbsp;<em class="icon-symbol-male"></em>&nbsp;&nbsp;
-												<input type="radio" name= "sex" value="2">&nbsp;<em class="icon-symble-female"></em>&nbsp;&nbsp;
-												<input type="radio" name= "sex" value="0" checked>&nbsp;<label>保密</label>
+												<input type="radio" name= "sex" value="1" th:checked="${session.mars_user.sex==1}">&nbsp;<em class="icon-symbol-male"></em>&nbsp;&nbsp;
+												<input type="radio" name= "sex" value="2" th:checked="${session.mars_user.sex==2}">&nbsp;<em class="icon-symble-female"></em>&nbsp;&nbsp;
+												<input type="radio" name= "sex" value="0" th:checked="${session.mars_user.sex==0}">&nbsp;<label>保密</label>
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td nowrap="nowrap" style="text-align: right;padding-right: 30px;">描述：</td>
+									<td >
+										<div class="form-group">
+											<div class="col-lg-12" style="padding-right: 0px;padding-left: 0px;">
+												<textarea th:text="${session.mars_user.description}" id="description" name="description">
+												</textarea>
 											</div>
 										</div>
 									</td>

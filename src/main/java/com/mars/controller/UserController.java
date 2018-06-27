@@ -290,7 +290,10 @@ public class UserController extends BaseController{
         String description = user.getDescription();
         Integer sex = user.getSex();
         userService.updateUserbyId(description,sex,new Date(),userId);
-        getSession().setAttribute(MARS_SESSION_USER_KEY,user);
+        User user2 = getUser();
+        user2.setSex(sex);
+        user2.setDescription(description);
+        getSession().setAttribute(MARS_SESSION_USER_KEY,user2);
         return new ResponseData();
     }
 
