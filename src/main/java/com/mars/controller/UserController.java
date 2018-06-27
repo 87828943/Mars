@@ -277,4 +277,23 @@ public class UserController extends BaseController{
         return new ResponseData();
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/editUserPassword",method = RequestMethod.POST)
+    @LoggerAnnotation(desc = "更改密码")
+    public ResponseData editUserPassword(String newPassword,String oldPassword,HttpServletResponse response){
+        if(StringUtils.isEmpty(newPassword) || StringUtils.isEmpty(oldPassword)){
+            return new ResponseData(MarsException.PARAM_EXCEPTION);
+        }
+        String password = getUser().getPassword();
+
+        if(!password.equals(MD5Util.encrypt(MARS_MD5_PASSWORD_KEY+oldPassword))){
+            return new ResponseData(MarsException.PASSWORD_ERROR);
+        }
+
+        userService.setNewPasswordById(MD5Util.encrypt(MARS_MD5_PASSWORD_KEY+newPassword),new Date(),getUserId());
+        getSession().removeAttribute(MARS_SESSION_USER_KEY);
+        CookieUtil.addCookie(response, MARS_COOKIE_USER_KEY, null, 0);
+        return new ResponseData();
+    }
+
 }
