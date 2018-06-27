@@ -17,6 +17,10 @@
                         </div>
                         <div class="user-block-info">
                            <div class="user-block-name" th:text="'欢迎  '+${session.mars_user.name}"></div>
+                           <div class="user-block-name">
+                              <em class="icon-symbol-male" th:if="${session.mars_user.sex == 1}"></em>
+                              <em class="icon-symble-female" th:if="${session.mars_user.sex == 2}"></em>
+                           </div>
                            <div class="user-block-role" th:if="${session.mars_user.description == null}">暂无简介</div>
                            <div class="user-block-role" th:if="${session.mars_user.description != null}" th:text="${session.mars_user.description}"></div>
                         </div>
