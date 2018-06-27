@@ -122,7 +122,10 @@ public class UserController extends BaseController{
         User registerUser = userService.register(user);
         HttpSession session = request.getSession();
         session.setAttribute(MARS_SESSION_USER_KEY,registerUser);
-        CookieUtil.addCookie(response, MARS_COOKIE_USER_KEY, user.toString(), 0);
+        
+        String cookieStr = "userId="+registerUser.getId().toString();
+        //设置cookie
+        CookieUtil.addCookie(response, MARS_COOKIE_USER_KEY, cookieStr, 24*60*60*7);
         return new ResponseData();
     }
 
