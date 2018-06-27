@@ -8,6 +8,7 @@ import com.mars.service.UserService;
 import com.mars.utils.CookieUtil;
 import com.mars.utils.MD5Util;
 import com.mars.utils.RedisUtil;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,7 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -241,10 +243,10 @@ public class UserController extends BaseController{
      * @param request
      * @return
      */
-    @RequestMapping(value = "/editUser",method = RequestMethod.POST)
+    @RequestMapping(value = "/editUserInfo",method = RequestMethod.POST)
     @LoggerAnnotation(desc = "编辑用户信息")
     public String editUser(Model model,HttpServletRequest request){
-        return "user/editUser";
+        return "user/editUserInfo";
     }
 
     @ResponseBody
@@ -276,5 +278,20 @@ public class UserController extends BaseController{
         getSession().setAttribute(MARS_SESSION_USER_KEY,user);
         return new ResponseData();
     }
-
+    
+    @ResponseBody
+    @RequestMapping(value = "/updateUserInfo",method = RequestMethod.POST)
+    @LoggerAnnotation(desc = "更改用户信息")
+    public ResponseData updateUserInfo(User user, HttpServletRequest request, HttpServletResponse response){
+        if (user != null && user.getSex() == null) {
+            logger.error("参数异常");
+            return new ResponseData(MarsException.PARAM_EXCEPTION);
+        }
+        Long userId = super.getUserId();
+        String description = user.getDescription();
+        Integer sex = user.getSex();
+        userService.updateUserbyId(description,sex,new Date(),userId);
+        getSession().setAttribute(MARS_SESSION_USER_KEY,user);
+        return new ResponseData();
+    }
 }

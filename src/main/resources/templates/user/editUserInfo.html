@@ -7,6 +7,49 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-4 col-md-4">
+						<form id="editUserInfo">
+							<table border="0" align="center" style="border-collapse:separate; border-spacing:0px 20px;">
+								<tr>
+									<td nowrap="nowrap" style="text-align: right;padding-right: 30px;">邮箱：</td>
+									<td >
+										<div class="form-group">
+											<div class="col-lg-12" style="padding-right: 0px;padding-left: 0px;">
+												<span th:text="${session.mars_user.email}"></span>
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td nowrap="nowrap" style="text-align: right;padding-right: 30px;">昵称：</td>
+									<td >
+										<div class="form-group">
+											<div class="col-lg-12" style="padding-right: 0px;padding-left: 0px;">
+												<span th:text="${session.mars_user.name}" ></span>
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td nowrap="nowrap" style="text-align: right;padding-right: 30px;">性别：</td>
+									<td >
+										<div class="form-group">
+											<div class="col-lg-12" style="padding-right: 0px;padding-left: 0px;">
+												<input type="radio" name= "sex" value="1">&nbsp;<em class="icon-symbol-male"></em>&nbsp;&nbsp;
+												<input type="radio" name= "sex" value="2">&nbsp;<em class="icon-symble-female"></em>&nbsp;&nbsp;
+												<input type="radio" name= "sex" value="0" checked>&nbsp;<label>保密</label>
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2" align="center">
+										<div class="form-group">
+											<button class="btn btn-block btn-primary mt-lg" style="width: 80%;" onclick="editUserInfo()">修改</button>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</form>
 					</div>
 				</div>
 			</div>

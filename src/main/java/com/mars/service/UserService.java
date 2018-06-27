@@ -2,6 +2,7 @@ package com.mars.service;
 
 import com.mars.entity.User;
 import com.mars.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,4 +37,8 @@ public class UserService {
     public void setLogoById(String savePath,Date updateTime, Long userId) {
         userRepository.setLogoById(savePath,updateTime,userId);
     }
+
+	public void updateUserbyId(String description, Integer sex, Date date, Long userId) {
+		userRepository.updateUserbyId(description,sex,date,userId);
+	}
 }

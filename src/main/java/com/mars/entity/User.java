@@ -8,7 +8,12 @@ import javax.persistence.Table;
 @Table(name="mars_user")
 public class User extends BaseEntity{
 
-    //账户
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5566658246030079901L;
+
+	//账户
     @Column(name="name", nullable = false, unique = true)
     private String name;
 
@@ -27,7 +32,11 @@ public class User extends BaseEntity{
     //描述
     @Column(name="description")
     private String description;
-
+    
+    //性别
+    @Column(name="sex")
+    private Integer sex = 0;
+    
     public String getName() {
         return name;
     }
@@ -67,6 +76,14 @@ public class User extends BaseEntity{
     public void setDescription(String description) {
         this.description = description;
     }
+
+	public Integer getSex() {
+		return sex;
+	}
+
+	public void setSex(Integer sex) {
+		this.sex = sex;
+	}
 
 	/*@Override
 	public String toString() {
