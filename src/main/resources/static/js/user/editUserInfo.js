@@ -25,9 +25,6 @@ function validate(){
             },
             income: {
                 validators: {
-                    notEmpty: {
-                        message: '请填写收入！'
-                    },
                     regexp: {
                         regexp: /^[1-9]\d*$/,
                         message: '请输入整整数！'
