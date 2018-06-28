@@ -20,7 +20,18 @@ function validate(){
 					stringLength: {
                         max: 15,
                         message: '不能超过15个字~'
+                    }
+                }
+            },
+            income: {
+                validators: {
+                    notEmpty: {
+                        message: '请填写收入！'
                     },
+                    regexp: {
+                        regexp: /^[1-9]\d*$/,
+                        message: '请输入整整数！'
+                    }
                 }
             }
         }
@@ -38,13 +49,15 @@ function editUserInfo(){
 
 	var sex = $("input[name='sex']:checked").val();
 	var description = $("#description").val();
+	var income = $("#income").val();
 
     $.ajax({
         url: "/user/updateUserInfo",
         type: "POST",
         data:{
             sex:sex,
-            description:description
+            description:description,
+            income:income
         },
         success: function(res) {
             if(res.resCode == "00000"){

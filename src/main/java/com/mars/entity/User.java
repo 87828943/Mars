@@ -37,6 +37,10 @@ public class User extends BaseEntity{
     @Column(name="sex")
     private Integer sex = 0;
     
+    //收入
+    @Column(name="income")
+    private Integer income;
+    
     public String getName() {
         return name;
     }
@@ -85,6 +89,15 @@ public class User extends BaseEntity{
 		this.sex = sex;
 	}
 
+	public Integer getIncome() {
+		return income;
+	}
+
+	public void setIncome(Integer income) {
+		this.income = income;
+	}
+
+	
 	/*@Override
 	public String toString() {
 		return "name=" + name + "#email=" + email + "#password=" + password + "#logo=" + logo + "#description=" + description;
