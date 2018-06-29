@@ -51,7 +51,7 @@ public class IndexController {
 
     @RequestMapping(value = "/newPassword",method = RequestMethod.GET)
     @LoggerAnnotation(desc = "设置新密码")
-    public String newPassword(String email,String key){
+    public String newPassword(){
         return "user/newPassword";
     }
 
@@ -72,8 +72,24 @@ public class IndexController {
     public String editUserPassword(){
         return "user/editUserPassword";
     }
+    @RequestMapping(value = "/editUserInfo",method = RequestMethod.POST)
+    @LoggerAnnotation(desc = "编辑用户信息")
+    public String editUser(){
+        return "user/editUserInfo";
+    }
 
     /*
     * user相关end
     * */
+
+
+    /*
+    * bill相关
+    * */
+
+    @RequestMapping(value = "/addBill",method = RequestMethod.POST)
+    @LoggerAnnotation(desc = "添加账单")
+    public String addBill(){
+        return "bill/addBill";
+    }
 }

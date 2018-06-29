@@ -3,7 +3,9 @@
  ========================================================================== */
 body,
 .wrapper > section {
-  background-color: #f5f7fa;
+  /*background-color: #f5f7fa;*/
+  background-image: url("/img/bg.jpg");
+  font-size: 15px;
 }
 .wrapper > .aside {
   background-color: #0E504A;
@@ -154,3 +156,103 @@ body,
   color: #515253;
 }
 
+ol, ul, li{
+  list-style: none;
+}
+.simple_list LI {
+  BORDER-BOTTOM: #dedede 1px solid;
+  TEXT-ALIGN: center;
+  LINE-HEIGHT: 74px;
+  WIDTH: 106px;
+  FLOAT: left;
+  HEIGHT: 74px;
+  FONT-SIZE: 14px;
+  BORDER-RIGHT: #dedede 1px solid;
+}
+.simple_list LI A {
+  WIDTH: 106px;
+  FLOAT: left;
+  HEIGHT: 74px;
+  COLOR: #000;
+  text-decoration: none;
+}
+.simple_list LI A.s1 {
+  BACKGROUND: #f7f9ea;
+}
+.simple_list LI A.s1:hover {
+  BACKGROUND: url(/img/simple_abg.png) #f7f9ea no-repeat
+}
+.simple_list LI.cur A.s1{
+  BACKGROUND: url(/img/simple_abg.png) #f7f9ea no-repeat
+}
+.simple_list LI A.s2 {
+  BACKGROUND: #fef6ec
+}
+.simple_list LI A.s2:hover {
+  BACKGROUND: url(/img/simple_abg.png) #fef6ec no-repeat
+}
+.simple_list LI.cur A.s2{
+  BACKGROUND: url(/img/simple_abg.png) #fef6ec no-repeat
+}
+.simple_list LI A.s3 {
+  BACKGROUND: #f5f3fb
+}
+.simple_list LI A.s3:hover {
+  BACKGROUND: url(/img/simple_abg.png) #f5f3fb no-repeat
+}
+.simple_list LI.cur A.s3{
+  BACKGROUND: url(/img/simple_abg.png) #f5f3fb no-repeat
+}
+.simple_list LI A.s4 {
+  BACKGROUND: #f1fafd
+}
+.simple_list LI A.s4:hover {
+  BACKGROUND: url(/img/simple_abg.png) #f1fafd no-repeat
+}
+.simple_list LI.cur A.s4{
+  BACKGROUND: url(/img/simple_abg.png) #f1fafd no-repeat
+}
+.simple_list LI A.s5 {
+  BACKGROUND: #fdeff5
+}
+.simple_list LI A.s5:hover {
+  BACKGROUND: url(/img/simple_abg.png) #fdeff5 no-repeat
+}
+.simple_list LI.cur A.s5{
+  BACKGROUND: url(/img/simple_abg.png) #fdeff5 no-repeat
+}
+.simple_list LI A.s6 {
+  BACKGROUND: #fdfef3
+}
+.simple_list LI A.s6:hover {
+  BACKGROUND: url(/img/simple_abg.png) #fdfef3 no-repeat
+}
+.simple_list LI.cur A.s6{
+  BACKGROUND: url(/img/simple_abg.png) #fdfef3 no-repeat
+}
+.simple_list LI A.s7 {
+  BACKGROUND: #effcec
+}
+.simple_list LI A.s7:hover {
+  BACKGROUND: url(/img/simple_abg.png) #effcec no-repeat
+}
+.simple_list LI.cur A.s7{
+
+  BACKGROUND: url(/img/simple_abg.png) #effcec no-repeat
+}
+.simple_list LI A.s8 {
+  BACKGROUND: #edf8d3; COLOR: #2b9501; FONT-WEIGHT: bold
+}
+.simple_list LI A.s8:hover {
+  BACKGROUND: url(/img/simple_abg.png) #edf8d3 no-repeat
+}
+.simple_list LI.cur A.s8{
+  BACKGROUND: url(/img/simple_abg.png) #edf8d3 no-repeat
+}
+.simple_list LI A.s8 EM {
+  FONT-FAMILY: Arial, Helvetica, sans-serif; FONT-SIZE: 30px; VERTICAL-ALIGN: middle; FONT-WEIGHT: bold
+}
+
+.modal fade{
+  color: black;
+}

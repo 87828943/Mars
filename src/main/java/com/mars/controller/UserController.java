@@ -8,7 +8,6 @@ import com.mars.service.UserService;
 import com.mars.utils.CookieUtil;
 import com.mars.utils.MD5Util;
 import com.mars.utils.RedisUtil;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +17,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,7 +27,6 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -237,20 +234,6 @@ public class UserController extends BaseController{
         }
         return Boolean.TRUE;
     }
-    /**
-     * 
-	 * @Description: 查询用户详情 
-     * @author: zhaoxingxing
-     * @date: 2018年6月22日 上午11:39:05
-     * @param model
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = "/editUserInfo",method = RequestMethod.POST)
-    @LoggerAnnotation(desc = "编辑用户信息")
-    public String editUser(Model model,HttpServletRequest request){
-        return "user/editUserInfo";
-    }
 
     @ResponseBody
     @RequestMapping(value = "/editUserLogo",method = RequestMethod.POST)
@@ -275,10 +258,8 @@ public class UserController extends BaseController{
             logger.error("图片上传失败！",e);
             return new ResponseData(MarsException.FAILED);
         }
-        User user = getUser();
-        user.setLogo(BASE_URI+savePath);
         userService.setLogoById(BASE_URI+savePath,new Date(),userId);
-        getSession().setAttribute(MARS_SESSION_USER_KEY,user);
+        super.reLoadSession();
         return new ResponseData();
     }    
     @ResponseBody
@@ -293,10 +274,7 @@ public class UserController extends BaseController{
         String description = user.getDescription();
         Integer sex = user.getSex();
         userService.updateUserbyId(description,sex,new Date(),userId);
-        User user2 = getUser();
-        user2.setSex(sex);
-        user2.setDescription(description);
-        getSession().setAttribute(MARS_SESSION_USER_KEY,user2);
+        super.reLoadSession();
         return new ResponseData();
     }
 

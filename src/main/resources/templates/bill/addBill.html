@@ -1,0 +1,45 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout :: htmlhead" th:with="title='favorites'"></head>
+<body>
+<section layout:fragment="content">
+    <div class="content-wrapper">
+        <h3>账单管理-新增账单</h3>
+        <div class="row">
+            <div class="col-lg-6 col-md-4">
+                <form id="editUserPasswordForm">
+                    <table border="0" align="center" style="border-collapse:separate; border-spacing:0px 20px;">
+                        <tr>
+                            <td nowrap="nowrap" style="text-align: right;padding-right: 30px;">账单类型：</td>
+                            <td >
+                                <div class="simple_list">
+                                    <ul>
+                                        <li><a href="#" cid="8" class="s1">餐饮饮食</a></li>
+                                        <li><a href="#" cid="9" class="s1">水果零食</a></li>
+                                        <li><a href="#" cid="10" class="s1">日常用品</a></li>
+                                        <li><a href="#" cid="11" class="s2">柴米油盐</a></li>
+                                        <li><a href="#" cid="12" class="s2">物业水电</a></li>
+                                        <li><a href="#" cid="13" class="s3">医疗保健</a></li>
+                                        <li><a href="#" cid="14" class="s1">交通费</a></li>
+                                        <li><a href="#" cid="15" class="s1">话费网费</a></li>
+                                        <li><a href="#" cid="16" class="s1">养车费</a></li>
+                                        <li><a href="#" cid="17" class="s2">旅行娱乐</a></li>
+                                        <li><a href="#" cid="20" class="s4">数码产品</a></li>
+                                        <li><a href="#" cid="21" class="s4">教育培训</a></li>
+                                        <li><a href="#" cid="22" class="s4">服饰装扮</a></li>
+                                        <li><a href="#" cid="23" class="s5">化妆品美容</a></li>
+                                        <li><a href="#" cid="25" class="s3">礼品礼金</a></li>
+                                        <li><a href="#" cid="29" class="s7">电器家具</a></li>
+                                        <li><a href="#" cid="30" class="s7">其他……</a></li>
+                                        <li class="in_type"><a href="#" cid="36" class="s8"><em>+</em>收入</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
