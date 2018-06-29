@@ -15,6 +15,10 @@ function validate(){
                 validators: {
                     notEmpty: {
                         message: '请填写昵称！'
+                    },
+                    stringLength: {
+                        max: 8,
+                        message: '不能超过8个字~'
                     }
                 }
             },

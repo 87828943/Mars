@@ -13,6 +13,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,7 @@ public class MarsFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest)servletRequest;
+        HttpServletResponse response = (HttpServletResponse)servletResponse;
         String requestURI = request.getRequestURI();
         if(request.getSession().getAttribute(MARS_SESSION_USER_KEY) != null){
             filterChain.doFilter(servletRequest,servletResponse);
@@ -55,8 +57,15 @@ public class MarsFilter implements Filter {
             	String userId = value.replace("userId=","");
             	if(userId != null){
             		User user = userService.findById(Long.parseLong(userId));
-            		request.getSession().setAttribute(MARS_SESSION_USER_KEY, user);
-                    filterChain.doFilter(servletRequest,servletResponse);
+            		if(user!=null){
+                        request.getSession().setAttribute(MARS_SESSION_USER_KEY, user);
+                        filterChain.doFilter(servletRequest,servletResponse);
+                    }else{
+                        CookieUtil.addCookie(response, MARS_COOKIE_USER_KEY, null, 0);
+                        //跳转主页
+                        String html = "<script type=\"text/javascript\">window.location.href=\"/index\"</script>";
+                        servletResponse.getWriter().write(html);
+                    }
             	}
         	}else if(urlList.contains(requestURI) || containsSuffix(requestURI)){
                 filterChain.doFilter(servletRequest,servletResponse);

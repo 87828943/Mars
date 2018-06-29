@@ -26,8 +26,12 @@ function validate(){
             income: {
                 validators: {
                     regexp: {
-                        regexp: /^[1-9]\d*$/,
-                        message: '请输入整整数！'
+                        regexp: /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/,
+                        message: '请填写正确收入~'
+                    },
+                    stringLength: {
+                        max: 12,
+                        message: '金额过大~'
                     }
                 }
             }
