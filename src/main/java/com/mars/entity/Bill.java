@@ -3,6 +3,7 @@ package com.mars.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name="mars_bill")
@@ -21,8 +22,8 @@ public class Bill extends BaseEntity{
     private Long userId;
 
     //金额
-    @Column(name="money")
-    private Long money;
+    @Column(name="money",precision=12, scale=2)
+    private BigDecimal money;
 
     public Integer getBillType() {
         return billType;
@@ -48,11 +49,11 @@ public class Bill extends BaseEntity{
         this.userId = userId;
     }
 
-    public Long getMoney() {
+    public BigDecimal getMoney() {
         return money;
     }
 
-    public void setMoney(Long money) {
+    public void setMoney(BigDecimal money) {
         this.money = money;
     }
 }
