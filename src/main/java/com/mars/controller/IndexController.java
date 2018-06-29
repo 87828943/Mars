@@ -72,11 +72,6 @@ public class IndexController {
     public String editUserPassword(){
         return "user/editUserPassword";
     }
-    @RequestMapping(value = "/editUserInfo",method = RequestMethod.POST)
-    @LoggerAnnotation(desc = "编辑用户信息")
-    public String editUser(){
-        return "user/editUserInfo";
-    }
 
     /*
     * user相关end
