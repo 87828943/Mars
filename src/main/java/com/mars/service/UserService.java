@@ -6,6 +6,7 @@ import com.mars.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Service
@@ -38,7 +39,7 @@ public class UserService {
         userRepository.setLogoById(savePath,updateTime,userId);
     }
 
-	public void updateUserbyId(String description, Integer sex, Date date, Long userId) {
-		userRepository.updateUserbyId(description,sex,date,userId);
+	public void updateUserbyId(String description, Integer sex, Date date, Long userId, BigDecimal income) {
+		userRepository.updateUserbyId(description,sex,date,userId,income);
 	}
 }

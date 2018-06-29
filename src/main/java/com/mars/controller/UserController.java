@@ -8,6 +8,7 @@ import com.mars.service.UserService;
 import com.mars.utils.CookieUtil;
 import com.mars.utils.MD5Util;
 import com.mars.utils.RedisUtil;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +28,9 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import java.io.File;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -271,9 +274,10 @@ public class UserController extends BaseController{
             return new ResponseData(MarsException.PARAM_EXCEPTION);
         }
         Long userId = super.getUserId();
+        BigDecimal income = user.getIncome();
         String description = user.getDescription();
         Integer sex = user.getSex();
-        userService.updateUserbyId(description,sex,new Date(),userId);
+        userService.updateUserbyId(description,sex,new Date(),userId,income);
         super.reLoadSession();
         return new ResponseData();
     }

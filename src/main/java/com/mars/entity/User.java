@@ -3,6 +3,7 @@ package com.mars.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name="mars_user")
@@ -36,10 +37,9 @@ public class User extends BaseEntity{
     //性别
     @Column(name="sex")
     private Integer sex = 0;
-    
     //收入
-    @Column(name="income")
-    private Integer income;
+    @Column(name="income",precision=12, scale=2)
+    private BigDecimal income;
     
     public String getName() {
         return name;
@@ -89,13 +89,15 @@ public class User extends BaseEntity{
 		this.sex = sex;
 	}
 
-	public Integer getIncome() {
+	public BigDecimal getIncome() {
 		return income;
 	}
 
-	public void setIncome(Integer income) {
+	public void setIncome(BigDecimal income) {
 		this.income = income;
 	}
+
+	
 
 	
 	/*@Override
