@@ -1,4 +1,4 @@
-package com.mars.enums;
+package com.mars.entity.enums;
 
 public enum BillTypeEnum {
 

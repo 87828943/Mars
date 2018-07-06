@@ -8,7 +8,6 @@ import com.mars.service.UserService;
 import com.mars.utils.CookieUtil;
 import com.mars.utils.MD5Util;
 import com.mars.utils.RedisUtil;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +27,6 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import java.io.File;
 import java.math.BigDecimal;
 import java.nio.file.Files;
@@ -220,7 +218,7 @@ public class UserController extends BaseController{
     /*
     * 发送html邮件
     * */
-    boolean sendHtmlEmail(String toEmail,String subject,String content){
+    public boolean sendHtmlEmail(String toEmail,String subject,String content){
         try {
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             //true表示需要创建一个multipart message
