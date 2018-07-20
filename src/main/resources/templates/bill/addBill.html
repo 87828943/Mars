@@ -11,7 +11,7 @@
                         <tr>
                             <td nowrap="nowrap" style="text-align: right;padding-right: 30px;">账单类型：</td>
                             <td >
-                                <div class="simple_list">
+                                <!--<div class="simple_list">
                                     <ul>
                                         <li><a href="#" cid="8" class="s1">餐饮饮食</a></li>
                                         <li><a href="#" cid="9" class="s1">水果零食</a></li>
@@ -32,6 +32,10 @@
                                         <li><a href="#" cid="30" class="s7">其他……</a></li>
                                         <li class="in_type"><a href="#" cid="36" class="s8"><em>+</em>收入</a></li>
                                     </ul>
+                                </div>-->
+                                <div class="simple_list">
+                                    <ul id="type_name_list">
+                                    </ul>
                                 </div>
                             </td>
                         </tr>
@@ -41,5 +45,6 @@
         </div>
     </div>
 </section>
+<script th:src="@{/js/bill/addBill.js}" ></script>
 </body>
 </html>

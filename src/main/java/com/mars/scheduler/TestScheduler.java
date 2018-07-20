@@ -10,7 +10,6 @@ import java.util.Date;
 
 @Component
 public class TestScheduler {
-
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
     @Autowired
     private UserController userController;
