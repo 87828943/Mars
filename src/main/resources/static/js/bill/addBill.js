@@ -9,7 +9,10 @@ function init(){
         type: "GET",
         success: function(res) {
             if(res.resCode == "00000"){
-                console.log(res);
+                var array = res.data;
+                for (var i =0;i<array.length;i++){
+                    $("#type_name_list").append("<li><a href='#' id="+array[i].id+" class='s1'>"+array[i].name+"</a></li>");
+                }
             }else{
                 $("#errorMsg").html("");
                 $("#errorMsg").html(res.resMsg);
